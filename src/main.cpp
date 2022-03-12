@@ -7,39 +7,64 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-#include "vex.h"
-
-using namespace vex;
-
-// A global instance of competition
-competition Competition;
-int timesPressed = 0;
-
+#include "functions.h"
+#include "autonomous_functions.h"
 void pre_auton(void) {
-  vexcodeInit();
 
+  vexcodeInit();
 }
 
 void autonomous(void) {
 
-}
+  initConfig();
+  
+  driveTo(forward, 51);
+  RightPincer.setTimeout(2, sec);
+  RightPincer.spinFor(reverse, 300, degrees);
+  RightArm.spinFor(reverse, 300, degrees);
+  
+  Drivetrain.setTimeout(5, sec);
+  driveTo(reverse, 70, 80);
+  turnTo(270);
 
-void addCounter() {
-  timesPressed++;
+  Drivetrain.setDriveVelocity(40, percent);
+  BackValve.set(true);
+  
+  driveTo(reverse, 20);
+  BackValve.set(false);
+  Band.spin(forward);
+  driveTo(forward, 20);
+  
+  for(int i = 0; i < 5; i++) {
+    
+    driveTo(forward, 15);
+    driveTo(reverse, 15);
+    
+    wait(20, msec);
+  }
 }
 
 void usercontrol(void) {
-  Control.ButtonLeft.pressed(addCounter);
+  
+  // Init configs
+  changeVelocity(100, 100);
+  changeTorque();
+  // Control configs
+  Control.ButtonLeft.pressed(manageFrontValve);
+  Control.ButtonRight.pressed(manageBackValve);
+  Control.ButtonA.pressed(moveReverseBand);
+  Control.ButtonY.pressed(stopBand);
+
   while (1) {
+    // Control functions
     moveLeft();
     moveRight();
-    moveArms();
     moveBand();
-    Control.Screen.print(timesPressed);
-    Control.Screen.newLine();
-    //thread frontThread = thread(moveFrontValve);
-    //thread backThread = thread(moveBackValve);
-    moveValves();
+    moveLeftArm();
+    moveRightArm();
+    moveLeftPincer();
+    moveRightPincer();
+
     wait(20, msec);
   }
 }
