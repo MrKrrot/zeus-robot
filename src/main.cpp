@@ -55,6 +55,8 @@ void usercontrol(void) {
   Control.ButtonA.pressed(moveReverseBand);
   Control.ButtonY.pressed(stopBand);
 
+  Control.ButtonX.pressed(manageRightValve);
+
   while (1) {
     // Control functions
     moveLeft();
@@ -63,7 +65,7 @@ void usercontrol(void) {
     moveLeftArm();
     moveRightArm();
     moveLeftPincer();
-    moveRightPincer();
+    //moveRightPincer();
 
     wait(20, msec);
   }

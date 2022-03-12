@@ -50,6 +50,7 @@ motor_group RightArm = motor_group(RightUpArm, RightDownArm);
 /* ====================== Valves ====================== */
 digital_out FrontValve = digital_out(Brain.ThreeWirePort.A);
 digital_out BackValve = digital_out(Brain.ThreeWirePort.D);
+digital_out RightPincerValve = digital_out(Brain.ThreeWirePort.E);
 
 /* ====================== Sensors ====================== */
 bumper RightBumper = bumper(Brain.ThreeWirePort.C);
@@ -59,6 +60,6 @@ smartdrive Drivetrain = smartdrive(LeftWheels, RightWheels, Inertial, 299.24, 39
 
 /* ================= Variables ================= */
 bool isBandReverse = false, enableBand = false;
-bool enableFrontValve = false, enableBackValve = false;
+bool enableFrontValve = false, enableBackValve = false, enableRightValve = false;
 
 bool exitBumper = false;

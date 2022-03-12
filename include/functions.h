@@ -141,3 +141,8 @@ void moveRightPincer() {
     RightPincer.stop(hold);
   }
 }
+
+void manageRightValve() {
+  enableRightValve = !enableRightValve;
+  RightPincerValve.set(enableRightValve);
+}
