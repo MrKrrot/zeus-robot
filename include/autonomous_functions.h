@@ -4,7 +4,9 @@
 
 void initConfig(){ 
   //Drivetrain.setRotation(0, degrees);
-  Drivetrain.setDriveVelocity(100, percent);
+  Drivetrain.setRotation(0, degrees);
+  Drivetrain.setHeading(0, degrees);
+  Drivetrain.setDriveVelocity(60, percent);
   Drivetrain.setTurnVelocity(20, percent);
   RightArm.setVelocity(100, percent);
   LeftArm.setVelocity(100, percent);
