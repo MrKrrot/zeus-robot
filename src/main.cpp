@@ -17,23 +17,6 @@ void pre_auton(void) {
 void autonomous(void) {
 
   initConfig();
-
-  BackValve.set(true);
-  driveTo(reverse, 20);
-  BackValve.set(false);
-  Band.spin(forward);
-  Drivetrain.setDriveVelocity(25, pct);
-  driveTo(forward, 20);
-  
-  for(int i = 0; i < 5; i++) {
-    
-    driveTo(reverse, 15);
-    driveTo(forward, 15);
-    
-    wait(20, msec);
-  }
-  Band.stop();
-  BackValve.set(true);
 }
 
 void usercontrol(void) {
