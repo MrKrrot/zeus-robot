@@ -146,3 +146,7 @@ void manageRightValve() {
   enableRightValve = !enableRightValve;
   RightPincerValve.set(enableRightValve);
 }
+
+void upRightArm() {
+  RightArm.spinFor(reverse, 200, degrees);
+}

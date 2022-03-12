@@ -17,31 +17,12 @@ void pre_auton(void) {
 void autonomous(void) {
 
   initConfig();
-  
-  driveTo(forward, 51);
-  RightPincer.setTimeout(2, sec);
-  RightPincer.spinFor(reverse, 300, degrees);
-  RightArm.spinFor(reverse, 300, degrees);
-  
-  Drivetrain.setTimeout(5, sec);
-  driveTo(reverse, 70, 80);
-  turnTo(270);
 
   Drivetrain.setDriveVelocity(40, percent);
-  BackValve.set(true);
-  
-  driveTo(reverse, 20);
-  BackValve.set(false);
-  Band.spin(forward);
-  driveTo(forward, 20);
-  
-  for(int i = 0; i < 5; i++) {
-    
-    driveTo(forward, 15);
-    driveTo(reverse, 15);
-    
-    wait(20, msec);
-  }
+  RightArm.setVelocity(100, pct);
+  thread MyThread = thread(upRightArm);
+  driveTo(forward, 10);
+  RightPincer.spinFor(forward, 300, degrees);
 }
 
 void usercontrol(void) {
