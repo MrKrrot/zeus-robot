@@ -57,8 +57,8 @@ void usercontrol(void) {
     moveLeftArm();
     moveRightArm();
     moveLeftPincer();
-
-    //moveRightPincer();
+    moveRightPincer();
+    
     wait(20, msec);
   }
 }
