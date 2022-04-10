@@ -53,12 +53,6 @@ void moveBand() {
 }
 
 /* ================= Valve Functions ================= */
-void manageFrontValve() {
-
-  enableFrontValve = !enableFrontValve;
-  FrontValve.set(enableFrontValve);
-}
-
 void manageBackValve() {
 
   enableBackValve = !enableBackValve;
@@ -66,6 +60,7 @@ void manageBackValve() {
 }
 
 /* ================= Base Functions ================= */
+
 void moveLeft(void) {
   if(Control.Axis3.value() < -20 || Control.Axis3.value() > 20) {
 
@@ -140,13 +135,4 @@ void moveRightPincer() {
     
     RightPincer.stop(hold);
   }
-}
-
-void manageRightValve() {
-  enableRightValve = !enableRightValve;
-  RightPincerValve.set(enableRightValve);
-}
-
-void upRightArm() {
-  RightArm.spinFor(reverse, 200, degrees);
 }

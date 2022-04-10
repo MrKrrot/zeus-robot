@@ -1,17 +1,21 @@
 #include "devices.h"
 
 /* ================= Distance Sensor ================= */
-
+/**
+ * Set up the robot configuration. Velocity, Drivetrain, torque, arms and pincers
+ */
 void initConfig(){ 
-  //Drivetrain.setRotation(0, degrees);
+  Drivetrain.setRotation(0, degrees);
   Drivetrain.setDriveVelocity(100, percent);
-  Drivetrain.setTurnVelocity(20, percent);
+  Drivetrain.setTurnVelocity(80, percent);
   RightArm.setVelocity(100, percent);
   LeftArm.setVelocity(100, percent);
   RightPincer.setVelocity(100, percent);
   LeftPincer.setVelocity(100, percent);
   Band.setVelocity(100, percent);
   RightPincer.setStopping(hold);
+  RightWheels.resetRotation();
+  LeftWheels.resetRotation();
 }
 
 void driveTo(directionType direccion, double distancia) {
@@ -22,36 +26,15 @@ void driveTo(directionType direccion, double distancia, double velocidad) {
   Drivetrain.driveFor(direccion, distancia, inches, velocidad, rpm);
 }
 
-void turnTo(double cantidad) {
-  Drivetrain.turnToHeading(cantidad, degrees);
+void turnTo(double grados) {
+  Drivetrain.turnToHeading(grados, degrees);
 }
 
-
-void driveDistance(directionType direction, double Inches) {
-  bool enableDrive = true;
-
-  while(enableDrive){
-    Control.Screen.print(Distance.objectDistance(inches));
-    if(direction == forward) {
-      Control.Screen.print("Forward");
-      if(Distance.objectDistance(inches) < Inches || !Distance.isObjectDetected() || Distance.objectDistance(inches) != 0) {
-        
-        Drivetrain.drive(forward);
-      } else {
-
-        enableDrive = false;
-        Drivetrain.stop();
-      }
-    }
-
-    if(direction == reverse) {
-      Control.Screen.print("Reverse");
-      if(Distance.objectDistance(inches) > Inches || !Distance.isObjectDetected() || Distance.objectDistance(inches) != 0) {
-        Drivetrain.drive(reverse);
-      } else {
-        enableDrive = false;
-        Drivetrain.stop();
-      }
+void checkStop() {
+  while(true) {
+    if(RightBumper.pressing() || RightWheels.rotation(degrees) > 900 || Distance.objectDistance(mm) > 1160) {
+      Drivetrain.stop();
+      break;
     }
   }
 }
